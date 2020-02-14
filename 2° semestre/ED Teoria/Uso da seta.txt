@@ -1,0 +1,68 @@
+#include<stdio.h>
+#include<stdlib.h>
+struct registro{
+	/*colocar daddos aqui*/
+};typedef struct registro Array;
+/*funcao sem seta*/
+void alocaDouble(Array *solo, int pos){
+	int i;
+	(*solo).tam = pos;
+	(*solo).elem = (double*)malloc(sizeof(double)*pos);
+	for(i=0;i<pos;i++){
+		(*solo).elem[i] = 0;
+	}
+}
+void liberaArray(Array *vetor,int numero){
+	int i;
+	/*fazer free em tudo que tiver malloc*/
+	
+}
+
+/*funcao com seta*/
+void alocaDouble(Array *solo, int pos){
+	int i;
+	solo->tam = pos;
+	solo->elem = (double*)malloc(sizeof(double)*pos);
+	for(i=0;i<pos;i++){
+		solo->elem[i] = 0;
+	}
+}
+
+/*A antes*/
+Array * alocaArray(int nro){
+	int i;
+	Array *novo;
+	
+	novo = (Array*)malloc(sizeof(Array)*nro);
+	for(i=0;i<nro;i++){
+		novo[i].tam = i+1;
+		novo[i].elem = (double*)malloc(sizeof(double)*(i+1));
+	}
+	return novo;
+}
+/*A depois*/
+Array* alocaArray(int nro){
+	int i;
+	Array *novo;
+	novo = (Array*)malloc(sizeof(Array)*nro);
+	if(novo ==NULL){
+		printf("ERRO ao alocar memoria\n");
+		exit(0);
+	}
+	for(i=0;i<nro;i++){
+		alocaDouble(novo+i,i+1);
+	}
+	return novo;
+}
+/*B*/
+int main(){
+	Array *var;
+	int i,n;
+	scanf("%d",&n);
+	var = alocaArray(n);
+	
+	/* Inserir nesse campo operações quaisquer*/
+	
+	liberaArray(var,n);
+	return 0;
+}

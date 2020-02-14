@@ -1,0 +1,14 @@
+#include<stdio.h>
+#include<stdlib.h>
+int main(){
+	int i,n;
+	double *v;
+	
+	v = (double*)malloc(sizeof(double)*n);
+	
+	for(i=0;i<n;i++){
+		scanf("%lf",&v[i]);
+  // ou scanf("%lf",v+i);
+	}
+	return 0;
+}

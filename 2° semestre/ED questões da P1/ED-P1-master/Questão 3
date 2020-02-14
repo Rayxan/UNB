@@ -1,0 +1,32 @@
+#include<stdio.h>
+#include<stdlib.h>
+struct produto{
+	float peso;
+	int cod;
+	char *desc;
+};typedef struct produto Prod;
+/*Questão B*/
+void imprimeProduto(Prod *array,int n){
+	int i;
+	for(i=0;i<n;i++){
+		printf("%lf %d %s\n", array[i].cod, array[i].cod, array[i].desc);
+	}
+}
+int main(){
+	int i,n;
+	scanf("%d",&n);
+	Prod *array;
+	/*Questão A*/
+	array = (Prod*)malloc(sizeof(Prod)*n);
+	for(i=0;i<n;i++){
+		array[i].desc = (char*)malloc(sizeof(char)*101);
+	}
+	imprimeProduto(array,n);
+	/*Questão C*/
+	for(i=0;i<n;i++){
+		free(array[i].desc);
+	}
+	free(array);
+	array = NULL;
+	return 0;
+}

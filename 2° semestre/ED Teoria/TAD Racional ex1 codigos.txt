@@ -1,0 +1,143 @@
+Código antes de se usar o TAD:
+
+------------------------------------------------------------------------
+#include <stdio.h>
+#define ok 1
+#define falha 0
+struct rac{
+    int numerador;
+    int denominador;
+};typedef struct rac Racional;
+
+int criaRacional(int num,int den,Racional *novo){
+    if(den!=0){
+        (*novo).numerador = num;
+        (*novo).denominador = den;
+        return ok;
+    }
+    else{
+        printf("\n[O numero anterior nao eh valido]\nDigite outro numero: \n");
+        return falha;
+    }
+}
+Racional adicaoRacional(Racional um, Racional dois){
+    Racional novo;
+    novo.numerador = (um.numerador * dois.denominador) + (dois.numerador * um.denominador); 
+    novo.denominador = um.denominador * dois.denominador; 
+    return novo;
+}
+Racional multRacional(Racional um, Racional dois){
+    Racional novo;
+    novo.numerador = um.numerador * dois.numerador;
+    novo.denominador = um.denominador * dois.denominador;
+    return novo;
+} 
+void imprimeRacional(Racional var){
+    printf("%d/%d\n",var.numerador,var.denominador);
+}
+
+int main(){
+    Racional var1,var2,varadd,varmul;
+    int num,den,criou;
+    do{
+    printf("Numerador e denominador do primeiro numero\n");
+    scanf("%d %d",&num,&den);
+    criou = criaRacional(num,den,&var1);
+    }while(criou==0);
+    do{
+    printf("Numerador e denominador do segundo numero\n");
+    scanf("%d %d",&num,&den);
+    criou = criaRacional(num,den,&var2);
+    }while(criou==0);
+
+    varadd = adicaoRacional(var1,var2);
+    imprimeRacional(varadd);
+
+    varmul = multRacional(var1,var2);
+    imprimeRacional(varmul);
+    return 0;
+}
+------------------------------------------------------------------------
+
+Código depois de utilizar TAD:
+------------------------------------------------------------------------
+Na main.c :
+
+#include<stdio.h>
+#include "racional.h"
+
+int main(){
+    Racional var1,var2,varadd,varmul;
+    int num,den,criou;
+    do{
+    printf("numerador e denominador do numero:\n");
+    scanf("%d %d",&num,&den);
+    criou = criaRacional(num,den,&var1);
+    }while(criou==0);
+    
+    do{
+    printf("numerador e denominador do numero:\n");
+    scanf("%d %d",&num,&den);
+    criou = criaRacional(num,den,&var2);
+    }while(criou==0);
+    
+    varadd = adicaoRacional(var1,var2);
+    imprimeRacional(varadd);
+    
+    varmul = multRacional(var1,var2);
+    imprimeRacional(varmul);
+    
+    return 0;
+}
+------------------------------------------------------------------------
+
+Na racional.c : 
+
+#include "racional.h"
+#define ok 1
+#define falha 0
+int criaRacional(int num, int den,Racional *novo){
+    if((den != 0)){
+        (*novo).numerador = num;
+        (*novo).denominador = den;
+        return ok;
+    }
+    else{
+        return falha;
+    }
+}
+Racional adicaoRacional(Racional um, Racional dois){
+    Racional novo;
+    novo.numerador = (um.numerador * dois.denominador) + (dois.numerador * um.denominador);
+    novo.denominador = (um.denominador * dois.denominador);
+    return novo;
+}
+Racional multRacional(Racional um, Racional dois){
+    Racional novo;
+    novo.numerador = (um.numerador * dois.numerador);
+    novo.denominador = (um.denominador * dois.denominador);
+    return novo;
+}
+Racional imprimeRacional(Racional var){
+    printf("%d/%d\n",var.numerador,var.denominador);
+}
+
+------------------------------------------------------------------------
+
+Na racional.h : 
+
+#include<stdio.h>
+
+struct rac{
+  int numerador;
+  int denominador;
+};typedef struct rac Racional;
+
+int criaRacional(int num, int den,Racional *novo);
+
+Racional adicaoRacional(Racional um, Racional dois);
+
+Racional multRacional(Racional um, Racional dois);
+
+Racional imprimeRacional(Racional var);
+

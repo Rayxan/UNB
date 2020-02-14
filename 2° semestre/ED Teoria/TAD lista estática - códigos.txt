@@ -1,0 +1,230 @@
+laeas_main.c
+---------------------------------------------------------------------
+#include"laeas.h"
+#define MAX 5
+#define SUCESSO 0
+
+int main(){
+    LAEAS vetorLista;
+    int num,elemento,criado=0;
+    do{
+        printf("\n\nDigite uma opcao: \n");
+        printf("1 Criar lista\n");
+        printf("2 Verificar se a lista estah cheia\n");
+        printf("3 Verificar se a lista estah vazia\n");
+        printf("4 Imprimir lista\n");
+        printf("5 Inserir elemento no inicio\n");
+        printf("6 Inserir elemento no final\n");
+        printf("7 Remover elemento no inicio\n");
+        printf("8 Remover elemento no final\n");
+        /*printf(" Buscar elemento\n");*/
+        printf("9 Limpar lista\n");
+        printf("0 Para sair\n");
+        scanf("%d",&num);
+        system(CLEAR);
+
+        if(num == 1){
+            criarLAEAS(&vetorLista);
+            printf("A lista foi criada com sucesso, boy\n");
+            criado = 1;
+        }
+        if(num == 2){
+            if(criado == 1){
+                if((vCheia(&vetorLista)==SUCESSO)){
+                    printf("A lista estah cheia!\n");
+                }else
+                    printf("A lista NAO estah cheia!\n");
+            }else
+                printf("A lista NAO foi criada");
+        }
+        if(num == 3){
+            if(criado == 1){
+                if(vVazia(&vetorLista)==SUCESSO){
+                    printf("A lista estah vazia!\n");
+                }else 
+                    printf("A lista NAO estah vazia!\n");
+            }else
+                printf("A lista NAO foi criada!");
+        }
+        if(num == 4){
+            if(criado == 1){
+                imprimirLAEAS(&vetorLista);
+            }else
+                printf("A lista NAO foi criada");
+        }
+        if(num == 5){
+            if(criado == 1){
+                printf("Digite o elemento a ser inserido: ");
+                scanf("%d",&elemento);
+                if(inserirInicio(&vetorLista,elemento)==SUCESSO){
+                    printf("O elemento foi inserido com SUCESSO!\n");
+                }else
+                    printf("Lista cheia, elemento NAO inserido!");
+            }else
+                printf("A lista NAO foi criada!");
+        }
+        if (num == 6){
+            if(criado == 1){
+                printf("Digite o elemento a ser inserido: \n");
+                scanf("%d",&elemento);
+                if(inserirFim(&vetorLista,elemento)==SUCESSO){
+                    printf("O elemento foi inserido com SUCESSO!\n");
+                }else 
+                    printf("Lista cheia, elemento nao inserido!\n");
+        }else
+            printf("A lista NAO foi criada!");
+        }
+        if(num==7){
+            if(criado == 1){
+                if(removerInicio(&vetorLista)==SUCESSO){
+                    printf("Remocao feita com sucesso!\n");
+                }else
+                    printf("Remocao impossivel, lista vazia\n");
+            }else
+                printf("A lista NAO foi criada!");
+        }
+        if(num==8){
+            if(criado == 1){
+                if(removerFim(&vetorLista)==SUCESSO){
+                    printf("Remocao feita com sucesso!\n");
+                }else 
+                    printf("Remocao impossivel, lista vazia\n");
+            }else
+                printf("A lista NAO foi criada!");
+        }
+        if(num == 9){
+            if(criado == 1){
+                if(limparLAEAS(&vetorLista)==SUCESSO){
+                    printf("A lista estah limpa!\n");
+                }else
+                    printf("Nao eh possivel limpar um lista vazia\n");
+            }else
+                printf("A lista NAO foi criada!");
+        }
+        
+    }while(num!=0);
+    return 0;
+}
+---------------------------------------------------------------------
+
+laeas.c
+---------------------------------------------------------------------
+#include"laeas.h"
+#define MAX 5
+void criarLAEAS(LAEAS *vetor){
+    vetor->fim = -1; /*(*vetor).fim*/
+}
+int vCheia(LAEAS *vetor){
+    if(vetor->fim == MAX-1){
+        return 0;
+    }
+    else
+        return 1;
+}
+int vVazia(LAEAS *vetor){
+    if(vetor->fim == -1){
+        return 0;
+    }else 
+        return 1;
+}
+int imprimirLAEAS(LAEAS *vetor){
+    int i;
+    if(vetor->fim != -1){
+        for(i=0;i<=vetor->fim;i++){
+            printf("[%d] ",vetor->elem[i]);
+        }
+    }else
+        printf("A lista estah vazia\n");
+}
+int inserirInicio(LAEAS *vetor,int elemento){
+    int j;
+    if(vetor->fim != MAX-1){ /*verificar se estah cheia*/
+        vetor->fim = vetor->fim+1;
+        j = vetor->fim;
+        while(j>=1){
+            vetor->elem[j] = vetor->elem[j-1];
+            j--;
+        }
+        vetor->elem[0] = elemento;
+        return 0;
+    }else 
+        return 1;
+}
+int inserirFim(LAEAS *vetor, int elemento){
+    if(vetor->fim != MAX-1){ /*verificar se estah cheia*/
+    vetor->fim = vetor->fim + 1; /*incrementa a posicao final, o numero inserido passa a ser o da posicao final*/
+    vetor->elem[vetor->fim] = elemento; /*insere o elemento*/
+    return 0;
+    }else
+        return 1;
+}
+int removerInicio(LAEAS *vetor){
+    int i=0;
+    if(vetor->fim != -1){
+        while(i < vetor->fim){
+            vetor->elem[i] = vetor->elem[i+1]; /* o vetor 0 recebe o valor do vetor 1, assim sucessivamente */
+            i++;
+        }
+        vetor->fim = vetor->fim-1;
+        return 0;
+    }else
+        return 1;
+}
+int removerFim(LAEAS *vetor){
+    if(vetor->fim != -1){
+        vetor->fim = vetor->fim-1;
+        return 0;
+    }else
+        return 1;
+}
+int limparLAEAS(LAEAS *vetor){
+    if(vetor->fim != -1){
+        vetor->fim = -1;
+        return 0;
+    }else
+        return 1;
+
+}
+/*Se inserir elemento no inicio*/
+/*Se a lista estiver cheia*/
+/*if(lista->fim == MAX-1)
+    return 1;
+}else{
+    lista->fim = lista->fim+1;
+    j = lista->fim;
+    while(j>=1){
+        lista->array[j] = lista->array[j-1];
+        j--;
+    }
+    lista->array[0] = elem;
+    */
+---------------------------------------------------------------------
+
+laeas.h
+---------------------------------------------------------------------
+#include<stdio.h>
+#include<stdlib.h>
+#define MAX 5
+
+#ifdef _WIN32               
+	#define CLEAR "cls"
+#else
+	#define CLEAR "clear"
+#endif
+
+struct lista{
+    int fim; /*indice*/
+    int elem[MAX];/*numero de elementos do vetor*/
+};typedef struct lista LAEAS;
+
+void criarLAEAS(LAEAS *vetor);
+int vCheia(LAEAS *vetor);
+int vVazia(LAEAS *vetor);
+int imprimirLAEAS(LAEAS *vetor);
+int inserirInicio(LAEAS *vetor,int elemento);
+int inserirFim(LAEAS *vetor,int elemento);
+int removerInicio(LAEAS *vetor);
+int removerFim(LAEAS *vetor);
+/*int buscarElemnto();*/
+int limparLAEAS(LAEAS *vetor);
+---------------------------------------------------------------------

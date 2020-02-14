@@ -1,0 +1,18 @@
+#include<stdio.h>
+#include<stdlib.h>
+int main(){
+	int a,i;
+	int *ponta,*pontv;
+	int v[3] = {7,2,4};
+	
+	ponta = v+1;
+	
+	a = (*ponta)+1;
+	
+	pontv = v;
+	
+	for(i=0;i<3;i++){
+		*(pontv + i) = *(pontv + i) - a;
+	}
+	return 0;
+}
