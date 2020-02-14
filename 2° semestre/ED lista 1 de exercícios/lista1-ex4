@@ -1,0 +1,6 @@
+Questão 4
+Seja int *ptr; um ponteiro inteiro. Explique as diferenças entre as operaçõoes *ptr++ e (*ptr)++.
+
+Resposta:
+
+Ambos imprimem o conteúdo de ptr com o acréscimo.

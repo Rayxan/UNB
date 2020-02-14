@@ -1,0 +1,43 @@
+Analise o cóodigo-fonte abaixo que foi elaborado apenas para imprimir um vetor de inteiros.
+#include<stdio.h>
+
+int main ()
+{
+  char * str = " Impressao de um vetor de inteiros ";
+  int * p = {1 ,5 ,7 ,8};
+  int i ;
+
+  printf (" %s \ n", str );
+  for (i = 0; i < 4; i ++){
+    printf ("% d ",p[ i ]) ;
+  }
+  return 0;
+}
+
+Com base no código-fonte acima, responda:
+
+1. Identifique e descreva os erros conceituais na utilização dos ponteiros.
+Resposta:
+
+char * str = " Impressao de um vetor de inteiros ";
+int * p = {1 ,5 ,7 ,8};
+
+Nas associações acima estão os erros, pois um ponteiro somente pode ser associado para um endereço.
+  
+2. Como imprimir um vetor de inteiros alocado estaticamente utilizando apenas ponteiros?
+
+Resposta:
+O acesso ao elemento de um vetor dado por índice utilizando ponteios é da seguinte forma:
+*(nomeVariávelVetor + índice)
+
+Exemplo:
+
+#include<stdio.h>
+int main(){
+	int vetor[] = {1,5,7,8};
+	int i;
+	for(i=0;i<4;i++){
+		printf(" %d",*(vetor+i));
+	}
+	return 0;
+}

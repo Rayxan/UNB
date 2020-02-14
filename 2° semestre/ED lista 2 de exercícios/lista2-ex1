@@ -1,0 +1,48 @@
+Explique as funcionalidades das funções da biblioteca stdlib, indicando os parâmetros recebidos
+como argumento e o que elas retornam:
+
+1. sizeof
+Essa função recebe como argumento uma variável ou um tipo de dado e retorna o tamanho(em bytes) dos valores que foram inseridos.
+Exemplo: sizeof(double); sizeof(x);
+
+2. malloc
+(aloca memória)
+Essa função recebe como argumento a quantidade de bytes a ser alocada dinâmicamente na memória. Retorna um ponteiro do tipo void. 
+obs:(geralmente é necessário a utilização de um casting antes da função)
+Exemplos utilizando um tipo ponteiro para inteiro:
+Exemplo sem casting: variável = malloc(sizeof(int));
+Emxemplo com casting: variável = (int *) malloc(sizeof(int));
+
+Casting: é utilizado nesse caso pra forçar que o valor retornado seja do mesmo tipo do ponteiro.
+
+OBS: Geralmente não devemos utilizar malloc sem casting de acordo com seu uso, 
+pois o ponteiro do tipo void aponta pra um endereço de memória, 
+porém não é possível saber o tipo de dado que ele está apontando.
+
+
+3. free
+Recebe a variável ponteiro que foi alocada dinamicamente.
+Desaloca a memória que foi alocada dinâmicamente, ou seja, a função free libera espaço de memória.
+Exemplo:free(VariávelQueFoiAlocada);
+
+
+4. calloc
+(aloca e inicializa memória)
+Recebe como argumento quantos elementos devem ser alocados(representados por um número inteiro positivo) 
+e o tamanho em bytes dos elementos que devem ser alocados. 
+Retorna um ponteiro do tipo void. Sendo necessária a utilização de casting de acordo com seu uso.
+Exemplo: variável = (int *) malloc(10, sizeof(int));
+
+
+5. realloc
+(realoca memória)
+Recebe como argumento a variável ponteiro a ser realocada e o tamanho em bytes do que deseja ser alocado.Ou seja,
+A variável ponteiro vai ser realocada em um novo bloco de memória do tamanho que foi especificado.
+
+Exemplo: variável=(int *) realloc(variável,sizeof(tamanho));
+
+---------------------------------------------------------------------
+OBS: As diferenças entre malloc e calloc são: 
+-malloc recebe como argumento somento 1 parâmetro, já calloc recebe 2.
+-malloc deixa o lixo de memória que estava no local da alocação do mesmo jeito, 
+já calloc substitui os lixos de memória nos locais a serem alocados por 0 (ou seja inicializa a memória).

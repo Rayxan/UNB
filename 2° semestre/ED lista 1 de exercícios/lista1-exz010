@@ -1,0 +1,20 @@
+Analise o código-fonte abaixo e responda o que é impresso na linha:
+
+#include<stdio.h>
+
+int main (){
+	int **p ,* ptr , vlr ;
+
+	vlr = 50;
+	ptr = & vlr ;
+	p = & ptr ;
+
+
+	vlr = *ptr - 2*(** p ) ;
+
+	printf("Valor : % d\n",**p) ;
+
+	return 0;
+}
+
+Resposta: Imprime -50.

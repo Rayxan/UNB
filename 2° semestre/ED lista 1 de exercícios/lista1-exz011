@@ -1,0 +1,16 @@
+Elabore um algoritmo em linguagem C que contenha um array contendo 5 elementos inteiros. Leia
+esse array do teclado e imprima o endereço das posicões contendo valores pares.
+
+#include<stdio.h>
+#include<stdlib.h>
+int main(){
+	int i,v[5];
+	
+	for(i=0;i<5;i++){
+		printf("Digite um numero: ");
+		scanf("%d",&v[i]);
+		if(v[i]%2==0)
+			printf("%d eh par e seu endereco eh: %p\n\n",v[i],&v[i]);
+	}
+	return 0;
+}

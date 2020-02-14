@@ -1,0 +1,126 @@
+Formule os comandos em linguaguem C para alocar dinamicamente os blocos de dados:
+
+1. Vetor de 1024 Bytes (1 Kbyte).
+
+#include<stdio.h>
+#include<stdlib.h>
+int main(){
+	int *vetor;
+	
+	vetor = (int *) malloc(256 * sizeof(int));
+	
+  free(vetor);
+	return 0;
+}
+
+2. Matriz de inteiros de dimensao 10 × 10.
+
+#include<stdio.h>
+#include<stdlib.h>
+#define linhas 10
+#define colunas 10
+int main(){
+	int i,j, **mat;
+	
+	mat = (int**) malloc(linhas*sizeof(int *)); /*linhas*/
+	
+	for(i=0;i<linhas;i++)
+		*(mat+i) = (int *) malloc(colunas*sizeof(int)); /*colunas*/
+	/*    mat[i] = (int *) malloc(colunas*sizeof(int))   */
+	
+	for(i=0;i<linhas;i++){
+		for(j=0;j<colunas;j++){
+			printf("Digite o valor [%d][%d] da matriz: ",i,j);
+			scanf("%d",*(mat+i)+j);
+		/*  scanf("%d",&mat[i][j]); */
+		}
+	}
+	
+	for(i=0;i<linhas;i++){
+		for(j=0;j<colunas;j++){
+			printf("MAT[%d][%d]: %d\n",i,j, *(*(mat+i)+j));
+	 	 /* printf("MAT[%d][%d]: %d\n",i,j, mat[i][j]) */
+		}
+	}
+	for(i=0;i<linhas;i++){
+		free(*(mat+i));
+		
+  /*for(i=0;i<linhas;i++)
+		free(mat[i]);*/
+	}
+	free(mat);
+	return 0;
+}
+
+3. Vetor para armazenar 50 registros contendo: nome do produto (30 caracteres), codigo do produto
+(inteiro) e preço em reais.
+
+#include<stdio.h>
+#include<stdlib.h>
+#define MAX 50
+struct Estoque{
+	char *nome;
+	int cod;
+	float preco;
+};typedef struct Estoque produto;
+int main(){
+	produto *mercadoria;
+	int i;
+	
+	mercadoria = (produto *) malloc(MAX*sizeof(produto));
+	
+	for(i=0;i<MAX;i++){
+		mercadoria[i].nome = (char*)malloc(sizeof(char)*30);
+		printf("Nome da mercadoria: ");
+		scanf("%s", mercadoria[i].nome);
+		printf("Codigo do produto: ");
+		scanf("%d",&mercadoria[i].cod);
+		printf("Preco da mercadoria: ");
+		scanf("%f",&mercadoria[i].preco);
+	}
+	for(i=0;i<MAX;i++){
+		printf("\nnome da mercadoria: %s\n",mercadoria[i].nome);
+		printf("codigo da mercadoria: %d\n",mercadoria[i].cod);
+		printf("preco da mercadoria: %.2f\n",mercadoria[i].preco);
+	}
+	for(i=0;i<MAX;i++){
+		free(mercadoria[i].nome);
+	}
+	free(mercadoria);
+	return 0;
+}
+
+
+4. Texto de até 100 linhas com até 80 caracteres em cada linha.
+
+#include<stdio.h>
+#include<stdlib.h>
+#define linhas 100
+#define colunas 80
+int main(){
+	int i,j;
+	char **frase;
+	
+	frase = (char**) malloc(linhas*sizeof(char *)); /*linhas*/
+	
+	for(i=0;i<linhas;i++)
+		*(frase+i) = (char *) malloc(colunas*sizeof(char)); /*colunas*/
+	
+	for(i=0;i<linhas;i++){
+		for(j=0;j<colunas;j++){
+			scanf("%c",*(frase+i)+j);
+		}
+	}
+	
+	for(i=0;i<linhas;i++){
+		for(j=0;j<colunas;j++){
+			printf("%c", *(*(frase+i)+j));
+		}
+	}
+	for(i=0;i<linhas;i++){
+		free(*(frase+i));
+	}
+	free(frase);
+	return 0;
+}
+

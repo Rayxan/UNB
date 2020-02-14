@@ -1,0 +1,26 @@
+Com base no código-fonte abaixo, responda:
+
+# include<stdio.h>
+# include<stdlib.h>
+
+int main (){
+	int * ptr1 ,* ptr2 ;
+	int i ;
+
+	ptr1 = (int *) malloc ( sizeof ( int ) );
+	ptr2 = & i ;
+	* ptr1 = i ;
+
+	printf (" %d %d\n" ,* ptr1 ,* ptr2 ) ;
+
+	free(ptr1);
+	return 0;
+}
+
+1. Existe algum erro no código-fonte?
+Resposta:
+Não.
+
+2. Explique as diferenças no uso dos ponteiros inteiros ptr1 e ptr2.
+Resposta: 
+A diferença é que o ptr1 é alocado dinâmicamente, já ptr2 é alocado estaticamente.

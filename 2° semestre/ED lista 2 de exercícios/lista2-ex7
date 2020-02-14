@@ -1,0 +1,35 @@
+#include<stdio.h>
+#include<stdlib.h>
+
+ struct reg
+ {
+ char *nome ;
+ float peso ; 
+ };
+
+ typedef struct reg Registro ;
+
+ int main ()
+ {
+ Registro *pessoa ;
+
+ pessoa = (Registro *)malloc(sizeof(Registro));
+ pessoa->nome = (char *) malloc(sizeof(char));
+ printf ("Digite o primeiro nome : ") ;
+ scanf ("%s", pessoa->nome );
+
+
+ printf ("Digite o peso : ") ;
+ scanf ("%f",&pessoa->peso );
+
+ printf ("%s e %f \n", pessoa->nome ,( pessoa->peso ) );
+free(pessoa->nome);
+free(pessoa);
+
+ return 0;
+ }
+
+O programa acima apenas lˆe informa¸c˜oes referentes a uma pessoa e as imprime na tela. No entanto,
+seu c´odigo-fonte est´a incompleto e pode apresentar erros. Implemente as partes 1 e 2 do c´odigo-fonte
+acima e identifique eventuais erros, visando manter seu funcionamento sem erros de compila¸c˜ao, execu¸c˜ao
+e vazamentos de mem´oria.

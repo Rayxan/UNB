@@ -1,0 +1,26 @@
+Analise o cóodigo-fonte abaixo e responda o que o programa abaixo imprime:
+
+#include < stdio .h >
+
+int * f (int *a , int * b){
+ 
+  a = b ;
+  *b = *b + *a;
+  return b;
+}
+int main (){
+ 
+  int a , b;
+  int * c ;
+
+  a = 1;
+  b = 2;
+
+  c = f (&a ,& b ) ;
+ 
+  printf (" Valor : % d \n " ,* c );
+
+  return 0;
+}
+
+Resposta : Imprime 4.

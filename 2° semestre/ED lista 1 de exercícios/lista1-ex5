@@ -1,0 +1,19 @@
+Questão 5
+Responda se a execução do código-fonte abaixo ocorre normalmente, desconsiderando avisos no momento da compilação. 
+Explique a razão pela qual não é indicado que um ponteiro aponte para uma variável de tipo diferente.
+
+#include<stdio.h>
+int main ()
+{
+    int * p ;
+
+    char ct = 'C';
+    p = & ct ;
+
+    printf ("%c\n",*p) ;
+
+    return 0;
+}
+
+
+Resposta = O compilador permite esse tipo de atribuição, porém não produz o resultado desejado.
